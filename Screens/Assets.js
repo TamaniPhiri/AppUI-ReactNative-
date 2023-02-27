@@ -1,120 +1,139 @@
-import { View, Text,Image,ScrollView,Switch,TouchableOpacity } from 'react-native'
+import { View, Text,TouchableOpacity, FlatList,Image, Switch } from 'react-native'
 import React,{useState} from 'react'
-import {Feather,MaterialCommunityIcons} from 'react-native-vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context'
-import Biker from '../assets/Biker.jpg'
+import {Feather,MaterialCommunityIcons} from 'react-native-vector-icons';
 
-const Assets = () => {
 
-  const [isEnabled, setIsEnabled] = useState(false);
-  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+
+const DATA=[
+
+  
+  {
+      id:1,
+      status:"Online",
+      image:require('../assets/Car1.jpg'),
+      icon:<Feather name='radio' style={{color:'#282A3A', fontSize:24}}/>,
+      description:'Lorem ipsum dolor, sit amet consectetur adipisicing elit.'
+  },
+  {
+      id:2,
+      status:"Offline",
+      image:require('../assets/Car2.jpg'),
+      icon:<Feather name='radio' style={{color:'#282A3A', fontSize:24}}/>,
+      description:'Lorem ipsum dolor, sit amet consectetur adipisicing elit.'
+  },
+  {
+      id:3,
+      status:"Offline",
+      image:require('../assets/Car3.jpg'),
+      icon:<Feather name='radio' style={{color:'#282A3A', fontSize:24}}/>,
+      description:'Lorem ipsum dolor, sit amet consectetur adipisicing elit. '
+  },
+  {
+      id:4,
+      status:"Online",
+      image:require('../assets/Car4.jpg'),
+      icon:<Feather name='radio' style={{color:'#282A3A', fontSize:24}}/>,
+      description:'Lorem ipsum dolor, sit amet consectetur adipisicing elit.'
+  },
+  {
+    id:5,
+    status:"Offline",
+    image:require('../assets/Car2.jpg'),
+    icon:<Feather name='radio' style={{color:'#282A3A', fontSize:24}}/>,
+    description:'Lorem ipsum dolor, sit amet consectetur adipisicing elit'
+  },
+  {
+      id:6,
+      status:"Offline",
+      image:require('../assets/Car3.jpg'),
+      icon:<Feather name='radio' style={{color:'#282A3A', fontSize:24}}/>,
+      description:'Lorem ipsum dolor, sit amet consectetur adipisicing elit'
+  },
+  {
+    id:7,
+    status:"Offline",
+    image:require('../assets/Car1.jpg'),
+    icon:<Feather name='radio' style={{color:'#282A3A', fontSize:24}}/>,
+    description:'Lorem ipsum dolor, sit amet consectetur adipisicing elit'
+  },
+  {
+    id:8,
+    status:"Online",
+    image:require('../assets/Car4.jpg'),
+    icon:<Feather name='radio' style={{color:'#282A3A', fontSize:24}}/>,
+    description:'Lorem ipsum dolor, sit amet consectetur adipisicing elit.'
+  },
+  {
+  id:9,
+  status:"Offline",
+  image:require('../assets/Car2.jpg'),
+  icon:<Feather name='radio' style={{color:'#282A3A', fontSize:24}}/>,
+  description:'Lorem ipsum dolor, sit amet consectetur adipisicing elit. '
+  },
+  ]; 
+
+
+function Assets () {
 
   return (
+    
     <SafeAreaView style={{flex:1, paddingHorizontal:10, width:'100%', height:'100%', backgroundColor:'#404258'}}>
-      <View style={{justifyContent:'center'}}>
+    <View>
 
-        {/*Header #assets*/}
-        <Text style={{fontSize:24, color:'#EEEEEE', marginBottom:10}}>
-          Assets
-        </Text>
+    <View style={{paddingBottom:10, marginTop:10}}>
+      <Text style={{fontSize:24, color:'#EEEEEE'}}>Assets</Text>
+    </View>
 
-        {/*Vehicle Image*/}
-        <Image source={Biker} style={{borderRadius:10, width:'100%', height:'45%'}} resizeMode={'contain'}/>
+      {/*Vehicle Cards*/}
+    <FlatList
+        contentContainerStyle={{ paddingBottom: 150}}
+        showsVerticalScrollIndicator={false}
+        data={DATA}
+        renderItem={({item}) => 
+        <View style={{flexDirection:'row',paddingTop:20}} key={item.id}>
 
-        {/*Details*/}
-          <View style={{flex:1, borderBottomWidth:0.2, borderBottomColor:'#fff', paddingTop:20}}>
-
-            {/*Status*/}
-            <View style={{paddingTop:8, flexDirection:'row',justifyContent:'space-between', alignItems:'center', width:'100%'}}>
-              <View style={{flexDirection:'row',width:'100%',justifyContent:'space-between', alignItems:'center'}}>
-                <View style={{flexDirection:'row',alignItems:'center'}}>
-                  <Feather name='radio' style={{color:'#00fa9a', fontSize:24}}/>
-                  <Text style={{fontSize:16, color:'#c0c0c0', paddingLeft:8, fontWeight:'100'}}>Status</Text>
-                </View>
-                <View>
-                  <Text style={{color:'#00fa9a', fontSize:16, fontWeight:'300'}}>
-                    Online
-                  </Text>
-                </View>
-              </View>
-            </View>
-
-            {/*Type of Vehicle*/}
-            <View style={{paddingTop:8,flexDirection:'row',justifyContent:'space-between', alignItems:'center', width:'100%'}}>
-              <View style={{flexDirection:'row',width:'100%',justifyContent:'space-between',alignItems:'center'}}>
-                <View style={{flexDirection:'row',alignItems:'center'}}>
-                  <Feather name='truck' style={{color:'#778899', fontSize:24}}/>
-                  <Text style={{fontSize:16, color:'#c0c0c0', paddingLeft:8, fontWeight:'100'}}>Mode</Text>
-                </View>
-                <View>
-                  <Text style={{color:'#EEEEEE', fontSize:16, fontWeight:'300'}}>
-                    MotorCycle
-                  </Text>
-                </View>
-              </View>
-            </View>
-
-            {/*Last Seen*/}
-            <View style={{paddingTop:8,flexDirection:'row',justifyContent:'space-between', alignItems:'center', width:'100%'}}>
-              <View style={{flexDirection:'row',width:'100%',justifyContent:'space-between',alignItems:'center'}}>
-                <View style={{flexDirection:'row',alignItems:'center'}}>
-                  <Feather name='eye' style={{color:'#778899', fontSize:24}}/>
-                  <Text style={{fontSize:16, color:'#c0c0c0', paddingLeft:8, fontWeight:'100'}}>
-                    Last Seen
-                  </Text>
-                </View>
-                <View>
-                  <Text style={{color:'#EEEEEE', fontSize:16, fontWeight:'300'}}>
-                    10 miles away
-                  </Text>
-                </View>
-              </View>
-            </View>
-          {/*End of Details*/}
-          </View> 
-          
-            {/*Buttons*/}
-          <View style={{paddingTop:10}}>
-            {/*ON-OFF*/}
-              <View style={{alignItems:'center', flexDirection:'row', justifyContent:'space-between'}}>
-                  <View style={{flexDirection:'row',width:'100%'}}>
-                      <Text style={{color:'#00fa9a',paddingRight:4}}>On</Text>
-                      <Text style={{color:'#EEEEEE'}}>/Off</Text>
-                  </View>
-                  <View style={{marginLeft:-35}}>
-                    <Switch
-                    trackColor={{false: '#767577', true: '#00fa9a'}}
-                    thumbColor={isEnabled ? '#282A3A' : '#f4f3f4'}
-                    ios_backgroundColor="#3e3e3e"
-                    onValueChange={toggleSwitch}
-                    value={isEnabled}
-                    />
-                  </View>
-              </View>
-
-              {/*Voice-Call*/}
-              <View style={{alignItems:'center', flexDirection:'row', justifyContent:'space-between',marginTop:10}}>
-                <Text style={{color:'#EEEEEE'}}>
-                  Voice Call
-                </Text>
-                <TouchableOpacity>
-                  <Feather name="phone" style={{fontSize:24, backgroundColor:'#fff',borderRadius:20,padding:6,color:'#282A3A'}}/>
-                </TouchableOpacity>
-              </View>
-
-              {/*Live-Location*/}
-              <View style={{alignItems:'center', flexDirection:'row', justifyContent:'space-between',marginTop:12}}>
-                <Text style={{color:'#EEEEEE'}}>
-                  Live Location
-                </Text>
-                <TouchableOpacity>
-                  <MaterialCommunityIcons name="navigation-variant-outline" style={{fontSize:24, backgroundColor:'#fff',borderRadius:20,padding:6,color:'#282A3A'}}/>
-                </TouchableOpacity>
-              </View>
+          {/*List Image*/}
+          <View>
+            <Image source={item.image} resizeMode={'cover'} style={{height:150, width:150, borderTopLeftRadius:10, borderBottomLeftRadius:10}}/>
           </View>
-      </View>
-      
-    </SafeAreaView>
+
+          {/*List Details*/}
+          <View style={{flexDirection:'row', backgroundColor:'#b0c4de', width:'100%', borderTopRightRadius:10, borderBottomRightRadius:10, paddingTop:15}}>
+
+            {/*Status Icon*/}
+            <View style={{paddingHorizontal:10}}>
+              {item.icon}
+            </View>
+
+            <View style={{width:'100%'}}>
+
+              {/*Status*/}
+              <Text style={{fontSize:16, paddingTop:3}}>{item.status}</Text>
+            
+                <View style={{paddingTop:10, width:'100%', paddingRight:20}}>
+                  <View style={{justifyContent:'center', width:'40%',alignItems:'center'}}>
+
+                    {/*Description*/}
+                  <Text style={{color:'#2f4f4f'}}>{item.description}</Text>
+
+                    {/*Locate Button*/}
+                    <TouchableOpacity style={{marginTop:30, backgroundColor:'#282A3A', borderRadius:5, width:'100%'}} onPress={()=>alert('Please Wait for response')}>
+                      <Text style={{paddingVertical:6, paddingHorizontal:50,color:'#fff'}}>Locate</Text>
+                    </TouchableOpacity>
+
+                  </View>
+                </View>
+            </View>
+          </View>
+        </View>
+        }
+        keyExtractor={item => item.id}
+      />
+
+    </View> 
+  </SafeAreaView>
+  
   )
 }
 

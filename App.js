@@ -1,7 +1,7 @@
 import React from 'react'
-import Settings from './Screens/Settings';
-import Home from './Screens/Home';
 import Assets from './Screens/Assets';
+import Home from './Screens/Home';
+import Control from './Screens/Control';
 import Notifications from './Screens/Notifications';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
@@ -28,15 +28,15 @@ const App = () => {
 
             <Tab.Screen name='Home' component={Home} options={{
               tabBarIcon:()=>(
-                <MaterialCommunityIcons name='arrow-decision' style={{fontSize:19, color:'#EEEEEE'}}/>
+                <MaterialCommunityIcons name='arrow-decision' style={{fontSize:22, color:'#EEEEEE'}}/>
               ),
               
             }}
             />
 
-            <Tab.Screen name='Assets' component={Assets}options={{
+            <Tab.Screen name='Control' component={Control}options={{
               tabBarIcon:()=>(
-                <MaterialCommunityIcons name='truck-check-outline' style={{fontSize:20, color:'#EEEEEE'}}/>
+                <MaterialCommunityIcons name='wrench-outline' style={{fontSize:20, color:'#EEEEEE'}}/>
               ),
             }}
             />
@@ -49,21 +49,22 @@ const App = () => {
               }}
             />
 
-            <Tab.Screen name='Notifications' component={Notifications}
-            options={{
-              tabBarIcon:()=>(
-                <MaterialCommunityIcons name='bell-outline' style={{fontSize:19, color:'#EEEEEE'}}/>
-              ),
-              tabBarBadge:2,
-              tabBarBadgeStyle:{height:15, width:3}
-            }}
-            />
 
-            <Tab.Screen name='Settings' component={Settings}
+            <Tab.Screen name='Assets' component={Assets}
               options={{
                 tabBarIcon:()=>(
-                  <MaterialCommunityIcons name='wrench-outline' style={{fontSize:19, color:'#808080'}}/>
+                  <MaterialCommunityIcons name='truck-check-outline' style={{fontSize:24, color:'#EEEEEE'}}/>
                 ),
+              }}
+            />
+
+            <Tab.Screen name='Notifications' component={Notifications}
+              options={{
+                tabBarIcon:()=>(
+                  <MaterialCommunityIcons name='bell-outline' style={{fontSize:20, color:'#EEEEEE'}}/>
+                ),
+                  tabBarBadge:2,
+                  tabBarBadgeStyle:{height:15, width:3}
               }}
             />
 

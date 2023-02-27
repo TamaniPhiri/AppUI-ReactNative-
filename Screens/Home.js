@@ -24,7 +24,7 @@ const Home = () => {
 
             {/*Search Input*/}
 
-            <View style={{width:'100%', backgroundColor:'#282A3A', borderRadius:8, flexDirection:'row', alignItems:'center', justifyContent:'space-between', height:45, top:90}}>
+            <View style={{width:'100%', backgroundColor:'#282A3A', borderRadius:8, flexDirection:'row', alignItems:'center', justifyContent:'space-between', height:45, top:55}}>
                 <TextInput placeholder='Search..' style={{width:'90%', paddingLeft:12}} placeholderTextColor={'#EEEEEE'}/>
                 <TouchableOpacity>
                     <Feather name='map-pin' style={{paddingRight:12, fontSize:16, color:'#EEEEEE'}}/>
