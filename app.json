@@ -1,15 +1,15 @@
 {
   "expo": {
-    "name": "drawer",
-    "slug": "drawer",
+    "name": "Mapp",
+    "slug": "Map",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/map.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/map.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#282A3A"
     },
     "updates": {
       "fallbackToCacheTimeout": 0

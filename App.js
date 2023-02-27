@@ -8,6 +8,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import {MaterialCommunityIcons} from 'react-native-vector-icons'
 import Add from './Screens/Add';
+import { StatusBar } from 'react-native';
 
 const Tab= createBottomTabNavigator();
 
@@ -15,7 +16,7 @@ const App = () => {
   return (
     <SafeAreaProvider>
       <NavigationContainer>
-
+      <StatusBar barStyle={"light-content"}/>
         <Tab.Navigator initialRouteName='Home' screenOptions={{
             headerShown:false, 
             tabBarStyle:{ backgroundColor:'#282A3A', borderRadius:10, marginBottom:5, position:'absolute', marginHorizontal:10, height:70},

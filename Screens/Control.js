@@ -12,7 +12,6 @@ const Control = () => {
   return (
     
     <SafeAreaView style={{flex:1, paddingHorizontal:10, width:'100%', height:'100%', backgroundColor:'#404258'}}>
-      <StatusBar barStyle={"light-content"}/>
       <View style={{justifyContent:'center'}}>
 
         {/*Header #assets*/}

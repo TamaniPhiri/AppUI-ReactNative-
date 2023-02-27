@@ -68,8 +68,6 @@ const Notifications = ({navigation}) => {
             </View>
         </View>
 
-        
-
       </View>
       </ScrollView>
     </SafeAreaView>
