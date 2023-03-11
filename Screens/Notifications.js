@@ -1,9 +1,11 @@
 import { View, Text, ScrollView } from 'react-native'
-import React from 'react'
+import React,{useState,useEffect} from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import {Feather} from 'react-native-vector-icons';
 
 const Notifications = ({navigation}) => {
+
+
   return (
     <SafeAreaView style={{flex:1, paddingHorizontal:10, width:'100%', height:'100%', backgroundColor:'#404258'}}>
       <ScrollView>

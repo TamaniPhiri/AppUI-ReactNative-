@@ -1,5 +1,5 @@
 import { View, Text,TouchableOpacity, FlatList,Image, Switch } from 'react-native'
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import {Feather,MaterialCommunityIcons} from 'react-native-vector-icons';
 
@@ -76,63 +76,51 @@ const DATA=[
 
 function Assets () {
 
+  const[data,setData]=useState([]);
+
+  useEffect(()=>{
+    getData();
+  },[])
+
+  const getData=async()=>{
+    await  fetch('https://web-production-8452.up.railway.app/api/assets')
+    .then(res => res.json())
+    .then(json=>setData(json));
+  }
+
   return (
     
-    <SafeAreaView style={{flex:1, paddingHorizontal:10, width:'100%', height:'100%', backgroundColor:'#404258'}}>
-    <View>
+    <SafeAreaView style={{flex:1, paddingHorizontal:10, width:'100%', height:'100%', backgroundColor:'#404258',justifyContent:'center'}}>
 
-    <View style={{paddingBottom:10, marginTop:10}}>
-      <Text style={{fontSize:24, color:'#EEEEEE'}}>Assets</Text>
-    </View>
+        <Text style={{fontSize:24, color:'#EEEEEE', marginVertical:10}}>
+          Assets
+        </Text>
 
-      {/*Vehicle Cards*/}
-    <FlatList
-        contentContainerStyle={{ paddingBottom: 150}}
-        showsVerticalScrollIndicator={false}
-        data={DATA}
-        renderItem={({item}) => 
-        <View style={{flexDirection:'row',paddingTop:20}} key={item.id}>
 
-          {/*List Image*/}
-          <View>
-            <Image source={item.image} resizeMode={'cover'} style={{height:150, width:150, borderTopLeftRadius:10, borderBottomLeftRadius:10}}/>
-          </View>
-
-          {/*List Details*/}
-          <View style={{flexDirection:'row', backgroundColor:'#b0c4de', width:'100%', borderTopRightRadius:10, borderBottomRightRadius:10, paddingTop:15}}>
-
-            {/*Status Icon*/}
-            <View style={{paddingHorizontal:10}}>
-              {item.icon}
-            </View>
-
+        <FlatList
+          contentContainerStyle={{ paddingBottom: 150 }}
+          showsVerticalScrollIndicator={false}
+          keyExtractor={(item)=>item.id}
+          data={data}
+          renderItem={({item})=>(
             <View style={{width:'100%'}}>
-
-              {/*Status*/}
-              <Text style={{fontSize:16, paddingTop:3}}>{item.status}</Text>
-            
-                <View style={{paddingTop:10, width:'100%', paddingRight:20}}>
-                  <View style={{justifyContent:'center', width:'40%',alignItems:'center'}}>
-
-                    {/*Description*/}
-                  <Text style={{color:'#2f4f4f'}}>{item.description}</Text>
-
-                    {/*Locate Button*/}
-                    <TouchableOpacity style={{marginTop:30, backgroundColor:'#282A3A', borderRadius:5, width:'100%'}} onPress={()=>alert('Please Wait for response')}>
-                      <Text style={{paddingVertical:6, paddingHorizontal:50,color:'#fff'}}>Locate</Text>
-                    </TouchableOpacity>
-
+              <View style={{flexDirection:'row',paddingVertical:10,elevation:10}}>
+                <Image source={{uri:item.image}} style={{width:200,height:200}}/>
+                <View>
+                  <View style={{justifyContent:'center', paddingHorizontal:10,paddingTop:10,marginTop:15}}>
+                    <Text style={{color:'#c0c0c0',paddingBottom:5,fontSize:18}}>{item.description.charAt(0).toUpperCase()+item.description.slice(1)}</Text>
+                    <Text style={{color:'#b0c4de',paddingBottom:5,paddingTop:8}}>{item.title.charAt(0).toUpperCase()+item.title.slice(1)}</Text>
+                  </View>
+                  <View style={{flexDirection:'row',paddingHorizontal:10,paddingVertical:8}}>
+                    <Feather name="wifi" style={{color:'#00fa9a'}}/>
+                    <Text style={{color:'#fff'}}>{item.status}</Text>
                   </View>
                 </View>
+              </View>
             </View>
-          </View>
-        </View>
-        }
-        keyExtractor={item => item.id}
-      />
-
-    </View> 
-  </SafeAreaView>
+          )}
+        />
+    </SafeAreaView>
   
   )
 }

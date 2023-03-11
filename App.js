@@ -25,6 +25,7 @@ const App = () => {
             tabBarHideOnKeyboard:true, 
             tabBarLabelStyle:{fontSize:12, paddingBottom:8},
             tabBarIconStyle:{marginTop:4},
+            tabBarShowLabel:false
             }}>
 
             <Tab.Screen name='Home' component={Home} options={{
@@ -64,7 +65,7 @@ const App = () => {
                 tabBarIcon:()=>(
                   <MaterialCommunityIcons name='bell-outline' style={{fontSize:20, color:'#EEEEEE'}}/>
                 ),
-                  tabBarBadge:2,
+                  tabBarBadge:4,
                   tabBarBadgeStyle:{height:15, width:3}
               }}
             />
