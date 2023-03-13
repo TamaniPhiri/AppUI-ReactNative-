@@ -19,7 +19,7 @@ const App = () => {
       <StatusBar barStyle={"light-content"}/>
         <Tab.Navigator initialRouteName='Home' screenOptions={{
             headerShown:false, 
-            tabBarStyle:{ backgroundColor:'#282A3A', borderRadius:10, marginBottom:5, position:'absolute', marginHorizontal:10, height:70},
+            tabBarStyle:{ backgroundColor:'#282A3A', borderRadius:10, marginBottom:30, position:'absolute', marginHorizontal:10, height:60},
             tabBarActiveTintColor: '#808080',
             tabBarInactiveTintColor:'#EEEEEE',
             tabBarHideOnKeyboard:true, 
@@ -66,7 +66,7 @@ const App = () => {
                   <MaterialCommunityIcons name='bell-outline' style={{fontSize:20, color:'#EEEEEE'}}/>
                 ),
                   tabBarBadge:4,
-                  tabBarBadgeStyle:{height:15, width:3}
+                  tabBarBadgeStyle:{height:17, width:3}
               }}
             />
 

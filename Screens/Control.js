@@ -1,13 +1,23 @@
-import { View, Text,Image,ScrollView,Switch,TouchableOpacity, StatusBar } from 'react-native'
+import { View, Text,Image,ScrollView,Switch,TouchableOpacity, StatusBar,Platform,Linking } from 'react-native'
 import React,{useState} from 'react'
 import {Feather,MaterialCommunityIcons} from 'react-native-vector-icons';
 import { SafeAreaView } from 'react-native-safe-area-context'
 import Biker from '../assets/Biker.jpg'
+import Animated, { FadeInDown, FadeInUp, FadeOut, FadeOutUp } from 'react-native-reanimated';
 
 const Control = () => {
 
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+  const openDialScreen = () => {
+    let number = '';
+    if (Platform.OS === 'ios') {
+      number = 'telprompt:${0973915557}';
+    } else {
+      number = 'tel:${0973915557}';
+    }
+    Linking.openURL(number);
+  };
 
   return (
     
@@ -20,7 +30,7 @@ const Control = () => {
         </Text>
 
         {/*Vehicle Image*/}
-        <Image source={Biker} style={{borderRadius:10, width:'100%', height:250}} resizeMode={'contain'}/>
+        <Animated.Image entering={FadeInUp} exiting={FadeInDown} source={Biker} style={{borderRadius:10, width:'100%', height:250}} resizeMode={'contain'}/>
 
         {/*Details*/}
           <View style={{ borderBottomWidth:0.2, borderBottomColor:'#fff', paddingTop:10, paddingBottom:20}}>
@@ -98,7 +108,7 @@ const Control = () => {
                 <Text style={{color:'#EEEEEE'}}>
                   Voice Call
                 </Text>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=>openDialScreen()}>
                   <Feather name="phone" style={{fontSize:24, backgroundColor:'#fff',borderRadius:20,padding:6,color:'#282A3A'}}/>
                 </TouchableOpacity>
               </View>

@@ -2,76 +2,10 @@ import { View, Text,TouchableOpacity, FlatList,Image, Switch } from 'react-nativ
 import React,{useState,useEffect} from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import {Feather,MaterialCommunityIcons} from 'react-native-vector-icons';
+import Animated, { FadeInDown, FadeInUp, FadeOut, FadeOutUp } from 'react-native-reanimated';
 
 
 
-const DATA=[
-
-  
-  {
-      id:1,
-      status:"Online",
-      image:require('../assets/Car1.jpg'),
-      icon:<Feather name='radio' style={{color:'#282A3A', fontSize:24}}/>,
-      description:'Lorem ipsum dolor, sit amet consectetur adipisicing elit.'
-  },
-  {
-      id:2,
-      status:"Offline",
-      image:require('../assets/Car2.jpg'),
-      icon:<Feather name='radio' style={{color:'#282A3A', fontSize:24}}/>,
-      description:'Lorem ipsum dolor, sit amet consectetur adipisicing elit.'
-  },
-  {
-      id:3,
-      status:"Offline",
-      image:require('../assets/Car3.jpg'),
-      icon:<Feather name='radio' style={{color:'#282A3A', fontSize:24}}/>,
-      description:'Lorem ipsum dolor, sit amet consectetur adipisicing elit. '
-  },
-  {
-      id:4,
-      status:"Online",
-      image:require('../assets/Car4.jpg'),
-      icon:<Feather name='radio' style={{color:'#282A3A', fontSize:24}}/>,
-      description:'Lorem ipsum dolor, sit amet consectetur adipisicing elit.'
-  },
-  {
-    id:5,
-    status:"Offline",
-    image:require('../assets/Car2.jpg'),
-    icon:<Feather name='radio' style={{color:'#282A3A', fontSize:24}}/>,
-    description:'Lorem ipsum dolor, sit amet consectetur adipisicing elit'
-  },
-  {
-      id:6,
-      status:"Offline",
-      image:require('../assets/Car3.jpg'),
-      icon:<Feather name='radio' style={{color:'#282A3A', fontSize:24}}/>,
-      description:'Lorem ipsum dolor, sit amet consectetur adipisicing elit'
-  },
-  {
-    id:7,
-    status:"Offline",
-    image:require('../assets/Car1.jpg'),
-    icon:<Feather name='radio' style={{color:'#282A3A', fontSize:24}}/>,
-    description:'Lorem ipsum dolor, sit amet consectetur adipisicing elit'
-  },
-  {
-    id:8,
-    status:"Online",
-    image:require('../assets/Car4.jpg'),
-    icon:<Feather name='radio' style={{color:'#282A3A', fontSize:24}}/>,
-    description:'Lorem ipsum dolor, sit amet consectetur adipisicing elit.'
-  },
-  {
-  id:9,
-  status:"Offline",
-  image:require('../assets/Car2.jpg'),
-  icon:<Feather name='radio' style={{color:'#282A3A', fontSize:24}}/>,
-  description:'Lorem ipsum dolor, sit amet consectetur adipisicing elit. '
-  },
-  ]; 
 
 
 function Assets () {
@@ -92,9 +26,9 @@ function Assets () {
     
     <SafeAreaView style={{flex:1, paddingHorizontal:10, width:'100%', height:'100%', backgroundColor:'#404258',justifyContent:'center'}}>
 
-        <Text style={{fontSize:24, color:'#EEEEEE', marginVertical:10}}>
+        <Animated.Text entering={FadeInUp} exiting={FadeOutUp} style={{fontSize:24, color:'#EEEEEE', marginVertical:10}}>
           Assets
-        </Text>
+        </Animated.Text>
 
 
         <FlatList
@@ -104,7 +38,7 @@ function Assets () {
           data={data}
           renderItem={({item})=>(
             <View style={{width:'100%'}}>
-              <View style={{flexDirection:'row',paddingVertical:10,elevation:10}}>
+              <View style={{flexDirection:'row',paddingVertical:10,elevation:8}}>
                 <Image source={{uri:item.image}} style={{width:200,height:200}}/>
                 <View>
                   <View style={{justifyContent:'center', paddingHorizontal:10,paddingTop:10,marginTop:15}}>
