@@ -15,9 +15,9 @@ const Home = () => {
     const navigation=useNavigation();
     const[location,setLocation]=useState(null);
     const[address,setAddress]=useState();
-    const[markers,setMarkers]=useState(null);
     const[type,setType]=useState("");
     const[userLocation,setUserLocation]=useState(false)
+
 
 
     const onPressNav=()=>{
@@ -42,18 +42,19 @@ const Home = () => {
             setLocation(currentLocation);
             console.log("Location:");
             console.log(currentLocation)
-            setMarkers(setLocation)
+            
         };
         getPermissions();
     },[]);
+
+    
 
     const geocode=async()=>{
         const geocodedLocation=await Location.geocodeAsync(address);
         console.log("Geocoded Address:");
         console.log(geocodedLocation);
     }
-
-
+   
 
   return (
     <SafeAreaView style={{flex:1}}>
@@ -70,15 +71,14 @@ const Home = () => {
             userLocationUpdateInterval={1}
             showsCompass={true}
             loadingEnabled={true}
-            >
-            {markers&&markers.map((marker,index)=>(
-                <Marker
+            />
+            <Marker
                 coordinate={{
-                    latitude:marker.latitude,
-                    longitude:28.2694583
+                    latitude:-134.6868,
+                    longitude:544.5094
                 }}/>
-            ))}
-        </MapView>
+           
+   
         {/*Layer Container*/}
         <TouchableWithoutFeedback onPress={()=>Keyboard.dismiss()}>
         <View style={{zIndex:10, paddingHorizontal:10, width:'100%', position:'absolute'}}>

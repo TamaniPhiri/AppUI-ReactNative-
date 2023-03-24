@@ -3,6 +3,7 @@ import React,{useState,useEffect} from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import {Feather,MaterialCommunityIcons} from 'react-native-vector-icons';
 import Animated, { FadeInDown, FadeInUp, FadeOut, FadeOutUp } from 'react-native-reanimated';
+import { ActivityIndicator } from 'react-native';
 
 
 
@@ -11,6 +12,7 @@ import Animated, { FadeInDown, FadeInUp, FadeOut, FadeOutUp } from 'react-native
 function Assets () {
 
   const[data,setData]=useState([]);
+  const[isloading, setIsLoading]=useState(true);
 
   useEffect(()=>{
     getData();
@@ -20,11 +22,13 @@ function Assets () {
     await  fetch('https://web-production-8452.up.railway.app/api/assets')
     .then(res => res.json())
     .then(json=>setData(json));
+    setIsLoading(false);
   }
 
   return (
     
     <SafeAreaView style={{flex:1, paddingHorizontal:10, width:'100%', height:'100%', backgroundColor:'#404258',justifyContent:'center'}}>
+      {isloading?(<View><ActivityIndicator size={100}/></View>):(<View>
 
         <Animated.Text entering={FadeInUp} exiting={FadeOutUp} style={{fontSize:24, color:'#EEEEEE', marginVertical:10}}>
           Assets
@@ -54,6 +58,7 @@ function Assets () {
             </View>
           )}
         />
+        </View>)}
     </SafeAreaView>
   
   )
