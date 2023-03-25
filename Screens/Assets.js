@@ -19,7 +19,7 @@ function Assets () {
   },[])
 
   const getData=async()=>{
-    await  fetch('https://web-production-8452.up.railway.app/api/assets')
+    await  fetch('api.coincap.io/v2/assets')
     .then(res => res.json())
     .then(json=>setData(json));
     setIsLoading(false);

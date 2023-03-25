@@ -1,18 +1,20 @@
-import { View, Text, Image, ScrollView, TextInput, TouchableWithoutFeedback, Keyboard} from 'react-native';
+import { View, Text,TextInput, TouchableWithoutFeedback, Keyboard} from 'react-native';
 import React,{useState,useEffect} from 'react';
 import { TouchableOpacity } from 'react-native';
 import {Feather} from 'react-native-vector-icons';
-import { useNavigation } from '@react-navigation/native';
 import MapView from 'react-native-maps';
 import { Marker } from 'react-native-maps';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import * as Location from 'expo-location'
+import { getAuth,signOut } from 'firebase/auth';
+import {useAuthentication} from '../Hooks/useAuthentication'
 
+const auth=getAuth();
 
+const Home = ({navigation}) => {
 
-const Home = () => {
+    const{user}=useAuthentication();
 
-    const navigation=useNavigation();
     const[location,setLocation]=useState(null);
     const[address,setAddress]=useState();
     const[type,setType]=useState("");
@@ -110,6 +112,15 @@ const Home = () => {
                         <Feather name='navigation-2' style={{fontSize:20, backgroundColor:'#282A3A', padding:10, borderRadius:20,color:'#EEEEEE', borderWidth:1, borderColor:'#EEEEEE'}}/>
                     </TouchableOpacity>
                 </View>
+            </View>
+
+            <View style={{marginTop:90}}>
+                <Text style={{color:'#fff'}}>Welcome{user?.email}</Text>
+                <TouchableOpacity style={{backgroundColor:'#080808'}}
+                onPress={()=>signOut(auth)}
+                >
+                    <Text style={{color:'#fff'}}>Logout</Text>
+                </TouchableOpacity>
             </View>
             
         </View>
