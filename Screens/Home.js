@@ -94,6 +94,8 @@ const Home = ({navigation}) => {
                 </TouchableOpacity>  
             </View>
 
+            <Text style={{color:'#fff'}}>Welcome{user?.email}</Text>
+
             {/*Layer Icon*/}
 
             <View style={{position:'absolute', left:'92%', marginTop:200, alignItems:'center', justifyContent:'center'}}>
@@ -114,12 +116,11 @@ const Home = ({navigation}) => {
                 </View>
             </View>
 
-            <View style={{marginTop:90}}>
-                <Text style={{color:'#fff'}}>Welcome{user?.email}</Text>
-                <TouchableOpacity style={{backgroundColor:'#080808'}}
+            <View style={{position:'absolute', marginTop:'115%', left:'91%', alignItems:'center', justifyContent:'center'}}>
+                <TouchableOpacity style={{backgroundColor:'#ff0000',paddingVertical:20, paddingHorizontal:10, alignItems:'center', justifyContent:'center', borderRadius:30}}
                 onPress={()=>signOut(auth)}
                 >
-                    <Text style={{color:'#fff'}}>Logout</Text>
+                    <Text style={{color:'#fff',fontSize:10}}>Logout</Text>
                 </TouchableOpacity>
             </View>
             

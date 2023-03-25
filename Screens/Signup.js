@@ -1,4 +1,4 @@
-import { View, Text,TouchableOpacity, TextInput,Image} from 'react-native'
+import { ScrollView, View, Text,TouchableOpacity, TextInput,Image,ActivityIndicator} from 'react-native'
 import React,{useState,useEffect} from 'react'
 import map from '../assets/map.png'
 import {createUserWithEmailAndPassword,getAuth} from 'firebase/auth'
@@ -11,6 +11,7 @@ const Login = ({navigation}) => {
   const[password,setPassword]=useState('');
   const[confirmPassword, setConfirmPassword]=useState('');
   const[validationMessage, setValidationMessage]=useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   let validateAndSet=(value, valueToCompare,setValue)=>{
     value!==valueToCompare
@@ -23,17 +24,51 @@ const Login = ({navigation}) => {
     email===''||password===''
     ?setValidationMessage('Please fill out the form')
     :''
+    setIsLoading(true);
     try{
-      await createUserWithEmailAndPassword(auth,email,password);
+      await createUserWithEmailAndPassword(auth,email.trim(),password);
       navigation.navigate('Login')
     }
     catch(error){
-      setValidationMessage(error.message)
+      let errorMessage = '';
+    switch (error.code) {
+      case 'auth/email-already-in-use':
+        errorMessage = 'Email address is already in use';
+        break;
+      case 'auth/invalid-email':
+        errorMessage = 'Invalid email address';
+        break;
+      case 'auth/missing-email':
+        errorMessage = 'Missing Email';
+        break;
+      case 'auth/weak-password':
+        errorMessage = 'Password is too weak';
+        break;
+      case 'auth/user-disabled':
+        errorMessage = 'This user account has been disabled';
+        break;
+      case 'auth/user-not-found':
+        errorMessage = 'User not found';
+        break;
+      case 'auth/internal-error':
+        errorMessage = 'An error ocurred';
+        break;
+      case 'auth/wrong-password':
+        errorMessage = 'Incorrect password';
+        break;
+      default:
+        errorMessage = error.message;
+    }
+      setValidationMessage(errorMessage)
+    }
+    finally {
+      setIsLoading(false);
     }
   }
 
   return (
-    <View style={{flex:1, alignItems:'center', justifyContent:'center',backgroundColor:'#282A3A'}}>
+    
+    <ScrollView style={{flex:1,backgroundColor:'#282A3A'}} contentContainerStyle={{ alignItems:'center', justifyContent:'center',paddingVertical:100}} showsVerticalScrollIndicator={false}>
 
       {/*Logo*/}
       <View style={{marginBottom:20}}>
@@ -74,16 +109,22 @@ const Login = ({navigation}) => {
         value={confirmPassword}
         onChangeText={(value)=>validateAndSet(value,password, setConfirmPassword)}
         />
+        <Text style={{alignItems:'center',color:'#ff0000',marginTop:8}}>{validationMessage}</Text>
       </View>
 
-      <Text>{validationMessage}</Text>
+      {/*Sign Up button*/}
 
-      {/*Sign Up Button*/}
+      {isLoading ? (
+        <ActivityIndicator size="small" color="#00fa9a" />
+      )
+      : (
       <TouchableOpacity style={{backgroundColor:'#808080', paddingHorizontal:10, width:'80%', alignItems:'center', paddingVertical:10, borderRadius:5}} onPress={createAccount}>
           <Text style={{color:'#fff'}}>
             Sign up
           </Text>
       </TouchableOpacity>
+        )
+      }
 
       {/*Have an account?*/}
       <TouchableOpacity onPress={()=>navigation.navigate('Login')} style={{width:'100%', alignItems:'center', flexDirection:'row',justifyContent:'center', paddingTop:15}}>
@@ -96,7 +137,7 @@ const Login = ({navigation}) => {
             Log in
           </Text>
       </TouchableOpacity>
-    </View>
+    </ScrollView>
   )
 }
 
